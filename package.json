@@ -1,0 +1,30 @@
+{
+  "name": "mevn-todo",
+  "version": "1.0.0",
+  "description": "An API for a MEVN to-do",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abro1986/MEVN-Todo.git"
+  },
+  "author": "Andrew Broestl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abro1986/MEVN-Todo/issues"
+  },
+  "homepage": "https://github.com/Abro1986/MEVN-Todo#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  }
+}
