@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const mongo = require('mongodb');
 const httpError = require('throw.js');
+require('dotenv').config();
+
+const {DB_USER, DB_PASSWORD} = process.env;
 
 router.get('/', async (req, res, next) => {
   try {
@@ -35,7 +38,7 @@ router.delete('/:id', async (req, res, next) => {
 })
 
 async function loadTodoCollection() {
-  const client = await mongo.MongoClient.connect('mongodb+srv://aBroestl:URTVkOQago07kzwQ@cluster0.ol3x2.mongodb.net/MEVN-todo?retryWrites=true&w=majority', 
+  const client = await mongo.MongoClient.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ol3x2.mongodb.net/MEVN-todo?retryWrites=true&w=majority`, 
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
