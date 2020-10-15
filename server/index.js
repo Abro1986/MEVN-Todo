@@ -5,12 +5,11 @@ const init = require('../routes/index');
 
 const app = express();
 
-init(app);
-
-
 //Middlewares
 app.use(bodyParser.json())
 app.use(cors());
+
+init(app);
 
 const port = process.env.PORT || 3000;
 
