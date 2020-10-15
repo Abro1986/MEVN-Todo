@@ -105,3 +105,5 @@ dist
 
 # Vs Code lauch files
 .vscode
+
+/client
