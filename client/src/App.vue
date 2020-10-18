@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <TodosComponent msg="Welcome to Your Vue.js App"/>
+    <SignUpComponent msg="Welcome to Your Vue.js App"/>
     <LoginComponent msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import TodosComponent from './components/TodosComponent.vue'
-import LoginComponent from './components/LoginComponent.vue'
+import TodosComponent from './components/TodosComponent.vue';
+import SignUpComponent from './components/SignUpComponent.vue';
+import LoginComponent from './components/LoginComponent.vue';
 
 export default {
   name: 'App',
   components: {
     TodosComponent,
+    SignUpComponent,
     LoginComponent
   }
 }

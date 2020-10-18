@@ -1,57 +1,43 @@
 <template>
   <div class="container">
-    <h1>Your Todos</h1>
+    <h1>Login</h1>
     <div class="create-post">
       <label for="create-post">username...</label>
-      <input type="text" id="create-post" v-model="text" placeholder="Create a Todo">
+      <input type="text" id="provide-username" v-model="userName" placeholder="User Name">
       <label for="create-password">password...</label>
-      <input type="text" id="create-password" v-model="text" placeholder="Create a Todo">
-      <button v-on:click="createPost" class="create-post">SEND IT!</button>
+      <input type="password" id="provide-password" v-model="passWord" placeholder="Password">
+      <button v-on:click="loginUser" class="provide-username">SEND IT!</button>
     </div>
     <hr>
     <p class="error" v-if="error">{{ error }}</p>
-    <div class="posts-container">
-      <div class="post"
-        v-for="(todo, index) in todos"
-        v-bind:item="todo"
-        v-bind:index="index"
-        v-bind:key="todo._id"
-        v-on:dblclick="deletePost(todo._id)"
-      > 
-        {{ `${todo.createdAt.getDate()}/${todo.createdAt.getMonth()}/${todo.createdAt.getFullYear()}` }}
-        <p class="text">{{ todo.text }}</p>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import TodosService from '../TodosService';
+import UsersService from '../UsersService';
 
 export default {
-  name: 'TodoComponent',
+  name: 'LoginComponent',
   // props: {
   //   msg: String
   // }
   data() {
     return {
-      todos: [],
-      error: '',
-      text: '',
-
+      userName: '',
+      passWord: '',
+      error: ''
     }
   },
-  async created() {
-    try {
-      this.todos =  await TodosService.getTodos();
-    } catch (err) {
-      this.err = err.message;
-    }
-  },
+  // async created() {
+  //   try {
+  //     this.todos =  await TodosService.getTodos();
+  //   } catch (err) {
+  //     this.err = err.message;
+  //   }
+  // },
   methods: {
-    async createPost() {
-      await TodosService.insertTodo(this.text);
-      this.todos = await TodosService.getTodos();
+    async loginUser() {
+      await UsersService.login(this.userName, this.passWord);
     },
     async deletePost(id) {
       await TodosService.deleteTodo(id);

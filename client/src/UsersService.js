@@ -1,36 +1,26 @@
 import axios from 'axios';
 
-const url = 'api/v1/todos/';
+const url = 'api/v1/users/';
 
 class TodosService {
   //Get Todos
-  static getTodos() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await axios.get(url);
-        const data = res.data;
-        resolve(
-          data.map(todo => ({
-            ...todo,
-            createdAt: new Date(todo.createdAt)
-          }))
-        );  
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
 
   //Create Todo
-  static insertTodo(text) {
+  static signUp(userName, passWord) {
     return axios.post(url, {
-      text
+      email: userName,
+      password: passWord
     });
   }
 
   //Delete Todo
-  static deleteTodo(id) {
-    return axios.delete(`${url}${id}`);
+  static login(userName, passWord) {
+    return axios.post(`${url}login`,
+      {
+        email: userName,
+        password: passWord
+      }
+    );
   }
 }
 
