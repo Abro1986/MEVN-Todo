@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const init = require('./routes/index');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+
+const init = require('./routes/index');
+const errorHandler = require('./util/errorHandler');
 
 const app = express();
 
@@ -26,3 +28,9 @@ if(process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`server started on port: ${port}`))
+
+app.use(async (err, req, res, next) => {
+  await errorHandler.HandleError(err, req, res, next);
+});
+
+//app.use(errorHandler)

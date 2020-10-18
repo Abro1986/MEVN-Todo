@@ -6,7 +6,6 @@
       <input type="text" id="create-post" v-model="text" placeholder="Create a Todo">
       <button v-on:click="createPost" class="create-post">SEND IT!</button>
     </div>
-    <hr>
     <p class="error" v-if="error">{{ error }}</p>
     <div class="posts-container">
       <div class="post"

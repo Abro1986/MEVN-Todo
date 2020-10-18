@@ -8,7 +8,6 @@
       <input type="password" id="create-password" v-model="passWord" placeholder="Password">
       <button v-on:click="createUser" class="create-post">SEND IT!</button>
     </div>
-    <hr>
     <p class="error" v-if="error">{{ error }}</p>
   </div>
 </template>

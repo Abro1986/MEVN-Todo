@@ -5,10 +5,10 @@
       <label for="create-post">username...</label>
       <input type="text" id="provide-username" v-model="userName" placeholder="User Name">
       <label for="create-password">password...</label>
-      <input type="password" id="provide-password" v-model="passWord" placeholder="Password">
-      <button v-on:click="loginUser" class="provide-username">SEND IT!</button>
+      <input :type="showInput ? 'text' : 'password' " id="provide-password" v-model="passWord" placeholder="Password">
+      <button v-on:click="loginUser" class="provide-username" >SEND IT!</button>
+      <button v-on:click="showInput = !showInput" text="" class="show-password">Show Password</button>
     </div>
-    <hr>
     <p class="error" v-if="error">{{ error }}</p>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
     return {
       userName: '',
       passWord: '',
-      error: ''
+      error: '',
+      showInput: true
     }
   },
   // async created() {
@@ -38,10 +39,14 @@ export default {
   methods: {
     async loginUser() {
       await UsersService.login(this.userName, this.passWord);
+      this.$router.push({name:'Todos'})
     },
     async deletePost(id) {
       await TodosService.deleteTodo(id);
       this.todos = await TodosService.getTodos();
+    },
+    showpassword() {
+      this.showInput = false
     }
   }
 }
