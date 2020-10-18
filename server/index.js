@@ -2,12 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const init = require('./routes/index');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const app = express();
 
 //Middlewares
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(cors());
 
 init(app);
