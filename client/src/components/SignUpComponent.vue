@@ -4,7 +4,7 @@
       <h1>Sign up</h1>
     </div>
     <div class="grid-container">
-      <input class="text-field" type="text" id="create-username" v-model="userName" placeholder="UserName">
+      <input class="text-field" type="text" id="create-username" v-model="userName" placeholder="Email">
       <input class="text-field" :type="showInput ? 'text' : 'password' " id="create-password" v-model="passWord" placeholder="Password">
     <div class="grid-container-button">
       <button v-on:click="createUser" class="create-post button-class">Sign Up</button>
@@ -12,29 +12,47 @@
     </div>
   </div>
     <p class="error" v-if="error">{{ error }}</p>
+    <VerifyComponent v-if="showVerificationMessage"/>
   </div>
 </template>
 
 <script>
 import UsersService from '../UsersService';
+import VerifyComponent from '../components/VerifyComponent.vue'
 
 export default {
   name: 'SignUpComponent',
+  components: {
+    VerifyComponent
+  },
   data() {
     return {
       userName: '',
       passWord: '',
       error: '',
       showInput: false,
+      showVerificationMessage: false
     }
   },
   methods: {
     async createUser() {
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(!re.test(this.userName)){
+        this.error = "please enter a valid email address";
+        this.userName = "";
+        this.passWord = "";
+        return
+      }
+      if(!this.passWord) {
+        this.error = "please enter a password";
+        this.passWord = "";
+        return
+      }
       await UsersService.signUp(this.userName, this.passWord);
-    },
-    async deletePost(id) {
-      await TodosService.deleteTodo(id);
-      this.todos = await TodosService.getTodos();
+      this.error = "";
+      this.userName = "";
+      this.passWord = "";
+      this.showVerificationMessage = true;
     },
   }
 }

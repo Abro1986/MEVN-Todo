@@ -2,7 +2,7 @@
   <div id="app"> 
     <div id="nav"> 
       <router-link class="router-element item-1 button-class nav-bar-button" to="/">Register</router-link>
-      <router-link class="router-element item-2 button-class nav-bar-button" to="/register">Login</router-link>
+      <router-link class="router-element item-2 button-class nav-bar-button" to="/login">Login</router-link>
       <button v-on:click="signOut" class="router-element item-3 button-class nav-bar-button" id="sign-out">Sign Out</button>
     </div>
     <router-view /> 
@@ -30,7 +30,7 @@ export default {
       var cookies = document.cookie.split(";");
       for (var i = 0; i < cookies.length; i++)
         eraseCookie(cookies[i].split("=")[0]);
-      this.$router.push({name:'Home'})  
+      this.$router.push({name:'Login'})  
     }
   },
 }

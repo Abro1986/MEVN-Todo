@@ -20,18 +20,27 @@ import UsersService from '../UsersService';
 
 export default {
   name: 'LoginComponent',
+  props: {
+    uuid: String
+  },
   data() {
     return {
       userName: '',
       passWord: '',
       error: '',
       showInput: false,
+      showVerificationMessage: false
     }
   },
   methods: {
     async loginUser() {
       await UsersService.login(this.userName, this.passWord);
-      this.$router.push({name:'Todos'})
+      let verified = await UsersService.verified(this.userName);
+      if(verified.data === true) {
+        this.$router.push({name:'Todos'})
+      } else {
+        this.showVerificationMessage = true
+      }
     },
     async deletePost(id) {
       await TodosService.deleteTodo(id);

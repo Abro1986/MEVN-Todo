@@ -1,8 +1,5 @@
 function HandleError(err, req, res, next) {
-  if(!err.statusCode || !err.message) {
-    next()
-  }
-  res.status(err.statusCode).send(err.message).end()
+  res.status(err.statusCode || 500).send(err.message).end()
  }
 
   
