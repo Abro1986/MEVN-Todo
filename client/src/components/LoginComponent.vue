@@ -1,13 +1,15 @@
 <template>
-  <div class="container">
-    <h1>Login</h1>
-    <div class="create-post">
-      <label for="create-post">username...</label>
-      <input type="text" id="provide-username" v-model="userName" placeholder="User Name">
-      <label for="create-password">password...</label>
-      <input :type="showInput ? 'text' : 'password' " id="provide-password" v-model="passWord" placeholder="Password">
-      <button v-on:click="loginUser" class="provide-username" >SEND IT!</button>
-      <button v-on:click="showInput = !showInput" text="" class="show-password">Show Password</button>
+  <div class="form-container">
+      <div class=text-container>
+        <h1>Sign In</h1>
+      </div>
+      <div class="grid-container">
+      <input type="text" id="provide-username" v-model="userName" placeholder="UserName" class="text-field">
+      <input :type="showInput ? 'text' : 'password' " id="provide-password" v-model="passWord" placeholder="Password" class="text-field">
+      <div class="grid-container-button">
+        <button v-on:click="loginUser" class="provide-username button-class" >Login</button>
+        <button v-on:click="showInput = !showInput" textContent="" class="show-password button-class">{{ showInput ? "Hide Password" : "Show Password" }}</button>
+      </div>
     </div>
     <p class="error" v-if="error">{{ error }}</p>
   </div>
@@ -18,24 +20,14 @@ import UsersService from '../UsersService';
 
 export default {
   name: 'LoginComponent',
-  // props: {
-  //   msg: String
-  // }
   data() {
     return {
       userName: '',
       passWord: '',
       error: '',
-      showInput: true
+      showInput: false,
     }
   },
-  // async created() {
-  //   try {
-  //     this.todos =  await TodosService.getTodos();
-  //   } catch (err) {
-  //     this.err = err.message;
-  //   }
-  // },
   methods: {
     async loginUser() {
       await UsersService.login(this.userName, this.passWord);
@@ -52,11 +44,10 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-div.container {
-  max-width: 800px;
-  margin: 0 auto;
+button {
+  margin: 0 auto,
+  bor
 }
 
 p.error {
@@ -89,4 +80,6 @@ p.text {
   font-weight: 700;
   margin-bottom: 0;
 }
+
+
 </style>

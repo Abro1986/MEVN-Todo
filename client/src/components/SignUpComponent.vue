@@ -1,13 +1,16 @@
 <template>
-  <div class="container">
-    <h1>Sign Up</h1>
-    <div class="create-post">
-      <label for="create-post">username...</label>
-      <input type="text" id="create-username" v-model="userName" placeholder="User Name">
-      <label for="create-password">password...</label>
-      <input type="password" id="create-password" v-model="passWord" placeholder="Password">
-      <button v-on:click="createUser" class="create-post">SEND IT!</button>
+  <div class="form-container">
+    <div class=text-container>
+      <h1>Sign up</h1>
     </div>
+    <div class="grid-container">
+      <input class="text-field" type="text" id="create-username" v-model="userName" placeholder="UserName">
+      <input class="text-field" :type="showInput ? 'text' : 'password' " id="create-password" v-model="passWord" placeholder="Password">
+    <div class="grid-container-button">
+      <button v-on:click="createUser" class="create-post button-class">Sign Up</button>
+      <button v-on:click="showInput = !showInput" textContent="" class="show-password button-class">{{ showInput ? "Hide Password" : "Show Password" }}</button>
+    </div>
+  </div>
     <p class="error" v-if="error">{{ error }}</p>
   </div>
 </template>
@@ -17,23 +20,14 @@ import UsersService from '../UsersService';
 
 export default {
   name: 'SignUpComponent',
-  // props: {
-  //   msg: String
-  // }
   data() {
     return {
       userName: '',
       passWord: '',
-      error: ''
+      error: '',
+      showInput: false,
     }
   },
-  // async created() {
-  //   try {
-  //     this.todos =  await TodosService.getTodos();
-  //   } catch (err) {
-  //     this.err = err.message;
-  //   }
-  // },
   methods: {
     async createUser() {
       await UsersService.signUp(this.userName, this.passWord);
@@ -41,17 +35,13 @@ export default {
     async deletePost(id) {
       await TodosService.deleteTodo(id);
       this.todos = await TodosService.getTodos();
-    }
+    },
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-div.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
 
 p.error {
   border: 1px solid #ff5b5f;

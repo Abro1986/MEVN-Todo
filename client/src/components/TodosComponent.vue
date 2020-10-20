@@ -1,10 +1,12 @@
 <template>
   <div class="container">
-    <h1>Your Todos</h1>
-    <div class="create-post">
-      <label for="create-post">Talk to me Goose</label>
-      <input type="text" id="create-post" v-model="text" placeholder="Create a Todo">
-      <button v-on:click="createPost" class="create-post">SEND IT!</button>
+    <div class="text-container">
+      <h1>Your Todos</h1>
+      <div class="create-post">
+        <label for="create-post"></label>
+        <input class="text-field" type="text" id="create-post" v-model="text" placeholder="Create a Todo">
+        <button v-on:click="createPost" class="create-post button-class">Create Todo</button>
+      </div>
     </div>
     <p class="error" v-if="error">{{ error }}</p>
     <div class="posts-container">
@@ -49,6 +51,7 @@ export default {
     async createPost() {
       await TodosService.insertTodo(this.text);
       this.todos = await TodosService.getTodos();
+      this.text = ''
     },
     async deletePost(id) {
       await TodosService.deleteTodo(id);
@@ -58,13 +61,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-div.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 p.error {
   border: 1px solid #ff5b5f;
   background-color: #ffc5c1;
@@ -73,21 +70,23 @@ p.error {
 }
 
 div.post {
+  margin-left: 10%;
+  margin-right: 10%;
   position: relative;
-  border: 1px solid #5bd658;
-  background-color:  #bcffb8;
+  border: 1px solid #2c3e50;
+  background: /* gradient can be an image */
+			    linear-gradient(
+			      to left, 
+			      #f3f3f5,
+			      #e1e0e6
+			    )
+			    left 
+			    bottom
+			    #fff  
+			    no-repeat;
+  background-size:100%;/* if linear-gradient, we need to resize it */ 
   padding: 10px 10px 30px 10px;
   margin-bottom: 15px;
-}
-
-div.created-at {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 5px 15px 5px 15px;
-  background-color: darkgreen;
-  color: white;
-  font-size: 13px;
 }
 
 p.text {
