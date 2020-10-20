@@ -13,7 +13,7 @@ function userSchema(request) {
         text: "The first one is on us, we started by checking off the task of making a todo list",
         createdAt: new Date(),
         uniqueId: Guid(),
-        completed: true
+        checked: true
       }
     ]
   }

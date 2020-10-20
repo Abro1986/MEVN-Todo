@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
       userSchema(req.body)
     );
     const user = await users.findOne({email: req.body.email});
-    await sgMail.send(sendGridTemplate(user._id.toHexString()));
+    await sgMail.send(sendGridTemplate(user.email));
     res.status(201).send("OK")
   } catch (err) {
     next(err);
@@ -55,7 +55,7 @@ router.post('/login', async (req, res, next) => {
 router.get('/:id/verify', async (req, res, next) => {
   try {
     const users = await loadUsersCollection();
-    await users.updateOne({_id: new mongo.ObjectID(`${req.params.id}`)}, { "$set": {"verified": true}} , {upsert: true});
+    await users.updateOne({"email": req.params.id}, { "$set": {"verified": true}} , {upsert: true});
     res.send("OK");
   } catch (err) {
     next(err);

@@ -5,7 +5,7 @@ function todoSchema(request) {
     text: request.text,
     createdAt: new Date(),
     uniqueId: Guid(),
-    completed: false
+    checked: false
   }
 }
 
