@@ -29,9 +29,6 @@ import TodosService from '../TodosService';
 
 export default {
   name: 'TodoComponent',
-  // props: {
-  //   msg: String
-  // }
   data() {
     return {
       todos: [],
