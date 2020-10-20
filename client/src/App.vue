@@ -80,6 +80,11 @@ body , .home {
   opacity: 0.9;
 }
 
+.app-title {
+  text-align: center;
+  font: 40px Arial, sas-serif
+}
+
 .router-element {
   all: unset;
 }

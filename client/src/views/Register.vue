@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1 class="app-title">ToDo App</h1>
     <SignupComponent />
   </div>
 </template>
