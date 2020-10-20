@@ -34,7 +34,6 @@ export default {
       todos: [],
       error: '',
       text: '',
-
     }
   },
   async created() {
