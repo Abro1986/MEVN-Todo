@@ -2,7 +2,7 @@
   <div id="app"> 
     <div id="nav"> 
       <router-link class="router-element item-1 button-class nav-bar-button" to="/">Register</router-link>
-      <router-link class="router-element item-2 button-class nav-bar-button" to="/register">Login</router-link>
+      <router-link class="router-element item-2 button-class nav-bar-button" to="/login">Login</router-link>
       <button v-on:click="signOut" class="router-element item-3 button-class nav-bar-button" id="sign-out">Sign Out</button>
     </div>
     <router-view /> 
