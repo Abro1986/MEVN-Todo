@@ -1,0 +1,76 @@
+<template>
+  <div class="form-container">
+    <div class=text-container>
+      <h1>Sign up</h1>
+    </div>
+    <div class="grid-container">
+      <input class="text-field" type="text" id="create-username" v-model="userName" placeholder="UserName">
+      <input class="text-field" :type="showInput ? 'text' : 'password' " id="create-password" v-model="passWord" placeholder="Password">
+    <div class="grid-container-button">
+      <button v-on:click="createUser" class="create-post button-class">Sign Up</button>
+      <button v-on:click="showInput = !showInput" textContent="" class="show-password button-class">{{ showInput ? "Hide Password" : "Show Password" }}</button>
+    </div>
+  </div>
+    <p class="error" v-if="error">{{ error }}</p>
+  </div>
+</template>
+
+<script>
+import UsersService from '../UsersService';
+
+export default {
+  name: 'SignUpComponent',
+  data() {
+    return {
+      userName: '',
+      passWord: '',
+      error: '',
+      showInput: false,
+    }
+  },
+  methods: {
+    async createUser() {
+      await UsersService.signUp(this.userName, this.passWord);
+    },
+    async deletePost(id) {
+      await TodosService.deleteTodo(id);
+      this.todos = await TodosService.getTodos();
+    },
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+p.error {
+  border: 1px solid #ff5b5f;
+  background-color: #ffc5c1;
+  padding:  10px;
+  margin-bottom: 15px;
+}
+
+div.post {
+  position: relative;
+  border: 1px solid #5bd658;
+  background-color:  #bcffb8;
+  padding: 10px 10px 30px 10px;
+  margin-bottom: 15px;
+}
+
+div.created-at {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 15px 5px 15px;
+  background-color: darkgreen;
+  color: white;
+  font-size: 13px;
+}
+
+p.text {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+</style>
